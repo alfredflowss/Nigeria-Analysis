@@ -1,0 +1,42 @@
+sub pop ()
+
+' Declaring variables 
+Dim last_row as long 
+DiM last_column as long 
+dim count as long
+dim state_name as string 
+dim row_count as integer
+
+' Setting columns names 
+Range("BX1").Value = "STATE"
+Range("BY1").Value = "POPULATION"
+
+' setting starter variables
+row_count = 2 
+count = 0 
+
+' getting last column count for for loop 
+last_column = Cells(2, Columns.Count).End(xlToLeft).Column
+
+' looping through the columns in the Nigeria states and population dataset
+	for j = 2 to last_column step 2
+		
+		name = cells(1,j-1).value
+		' setting column as variabale
+		Range("BX" & row_count).Value = name
+		
+		' getting last row count for for loop 
+		last_row = Cells(Rows.Count, j).End(xlUp).Row
+		
+		for i = 3 to last_row
+		
+			count = count + cells(i,j).value
+			Range("BY" & row_count).Value = count
+		
+		next i
+		count = 0 
+		row_count = row_count + 1
+	next j
+
+end sub
+
